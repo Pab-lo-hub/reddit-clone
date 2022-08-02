@@ -47,6 +47,17 @@ export default function Home({ posts }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
+      <header className='bg-black text-white h-12 flex pt-3 px-5 pb-2'>
+        <p>Reddit clone</p>
+        <p className='grow'></p>
+        <a
+          className='flex-l border px-4 font-bold rounded-full mb-1'
+          href='/api/auth/signin'
+        >
+          login
+        </a>
+      </header>
+      
       <Posts posts={posts} />
     </div>
   )
