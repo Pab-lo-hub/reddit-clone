@@ -10,7 +10,10 @@ export default function Post({ post }) {
             <Link href={`/r/${post.subredditName}`}>
               <a className='mr-2 underline'>/r/{post.subredditName}</a>
             </Link>
-            /r/{post.subredditName} Posted by {post.author.name}{' '}
+            /r/{post.subredditName} Posted by
+            <Link href={`/u/${post.author.name}`}>
+              <a className='ml-1 underline'>{post.author.name}</a>
+            </Link>{' '}}{' '}
             <Link href={`/r/${post.subredditName}/comments/${post.id}`}>
               <a className='mx-2 underline'>
                 {timeago.format(new Date(post.createdAt))}
@@ -20,7 +23,7 @@ export default function Post({ post }) {
         </div>
       </div>
       <div className='mt-5'>
-      <Link href={`/r/${post.subredditName}/comments/${post.id}`}>
+        <Link href={`/r/${post.subredditName}/comments/${post.id}`}>
           <a className='flex-shrink text-2xl font-bold color-primary width-auto'>
             {post.title}
           </a>
