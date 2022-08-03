@@ -96,6 +96,12 @@ export default function Post({ subreddit, post, votes, vote }) {
             <p className='flex-shrink text-base font-normal color-primary width-auto mt-2'>
               {post.content}
             </p>
+            {post.image && (
+              <img
+                className='flex-shrink text-base font-normal color-primary width-auto mt-2'
+                src={post.image}
+              />
+            )}
           </div>
           {session ? (
             <NewComment post={post} />
@@ -107,7 +113,7 @@ export default function Post({ subreddit, post, votes, vote }) {
               to add a comment
             </p>
           )}
-          <Comments comments={post.comments} post={post}/>
+          <Comments comments={post.comments} post={post} />
         </div>
       </div>
     </>
