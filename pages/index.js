@@ -1,49 +1,28 @@
 import Head from 'next/head'
-import { getPosts } from 'lib/data.js'
 import prisma from 'lib/prisma'
-import timeago from 'lib/timeago'
-
-const Post = ({ post }) => {
-  return (
-    <div className='flex flex-col mb-4 border border-3 border-black p-10 bg-gray-200 mx-20 my-10'>
-      <div className='flex flex-shrink-0 pb-0 '>
-        <div className='flex-shrink-0 block group '>
-          <div className='flex items-center text-gray-800'>
-            /r/{post.subredditName} Posted by {post.author.name}{' '}
-            {timeago.format(new Date(post.createdAt))}
-          </div>
-        </div>
-      </div>
-      <div className='mt-5'>
-				<p className='flex-shrink text-2xl font-bold color-primary width-auto'>          
-					{post.title}
-        </p>
-				<p className='flex-shrink text-base font-normal color-primary width-auto mt-2'>
-          {post.content}
-        </p>
-      </div>
-    </div>
-  )
-}
-
-const Posts = ({ posts }) => {
-  if (!posts) return null
-
-  return (
-    <>
-      {posts.map((post, index) => (
-        <Post key={index} post={post} />
-      ))}
-    </>
-  )
-}
+import { getPosts } from 'lib/data'
+import Posts from 'components/Posts'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function Home({ posts }) {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+  const loading = status === 'loading'
+
+  if (loading) {
+    return null
+  }
+
+  if (session && !session.user.name) {
+    router.push('/setup')
+  }
+
   return (
     <div>
       <Head>
-        <title>Reddit Clone</title>
-        <meta name='description' content='A great social network!' />
+        <title></title>
+        <meta name='description' content='' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -52,12 +31,12 @@ export default function Home({ posts }) {
         <p className='grow'></p>
         <a
           className='flex-l border px-4 font-bold rounded-full mb-1'
-          href='/api/auth/signin'
+          href={session ? '/api/auth/signout' : '/api/auth/signin'}
         >
-          login
+          {session ? 'logout' : 'login'}
         </a>
       </header>
-      
+
       <Posts posts={posts} />
     </div>
   )
@@ -69,7 +48,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      posts: posts,
+      posts,
     },
   }
 }
