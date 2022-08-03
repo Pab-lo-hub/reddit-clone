@@ -19,31 +19,30 @@ export default async function handler(req, res) {
   if (!user) return res.status(401).json({ message: 'User not found' })
 
   if (req.method === 'POST') {
-    const data = {
-      content: req.body.content,
-      post: {
-        connect: {
-          id: req.body.post,
+    await prisma.vote.upsert({
+      where: {
+        authorId_postId: {
+          authorId: user.id,
+          postId: req.body.post,
         },
       },
-      author: {
-        connect: { id: user.id },
+      update: {
+        up: req.body.up,
       },
-    }
-
-    if (req.body.comment) {
-      data.parent = {
-        connect: {
-          id: req.body.comment,
+      create: {
+        up: req.body.up,
+        post: {
+          connect: {
+            id: req.body.post,
+          },
         },
-      }
-    }
-
-    const comment = await prisma.comment.create({
-      data: data,
+        author: {
+          connect: { id: user.id },
+        },
+      },
     })
 
-    res.json(comment)
+    res.end()
     return
   }
 }
