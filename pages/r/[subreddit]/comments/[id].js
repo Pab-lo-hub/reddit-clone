@@ -2,9 +2,9 @@ import prisma from 'lib/prisma'
 import { getPost, getSubreddit, getVote, getVotes } from 'lib/data.js'
 import Link from 'next/link'
 import timeago from 'lib/timeago'
-import NewComment from 'components/NewComment'
+import NewComment from 'components/newcomment'
 import { useSession, getSession } from 'next-auth/react'
-import Comments from 'components/Comments'
+import Comments from 'components/comments'
 import { useRouter } from 'next/router'
 
 export default function Post({ subreddit, post, votes, vote }) {

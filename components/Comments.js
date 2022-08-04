@@ -1,6 +1,6 @@
 import timeago from 'lib/timeago'
 import { useState } from 'react'
-import NewComment from 'components/NewComment'
+import NewComment from 'components/newcomment'
 import Link from 'next/link'
 
 const Comment = ({ comment }) => {
