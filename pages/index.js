@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import prisma from 'lib/prisma'
+import prisma from './lib/prisma'
 import { getPosts } from 'lib/data'
 import Posts from 'components/posts'
 import { useSession } from 'next-auth/react'
