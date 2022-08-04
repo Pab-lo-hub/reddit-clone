@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import prisma from 'lib/prisma'
 import { getUser, getPostsFromUser } from 'lib/data.js'
-
 import Posts from 'components/posts'
 
 export default function Profile({ user, posts }) {

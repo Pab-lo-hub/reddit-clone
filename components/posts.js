@@ -1,5 +1,5 @@
 import timeago from 'lib/timeago'
-import Post from 'components/Post'
+import Post from 'components/post'
 
 export default function Posts({ posts }) {
   if (!posts) return null
