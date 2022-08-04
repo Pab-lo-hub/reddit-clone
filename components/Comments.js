@@ -1,6 +1,7 @@
 import timeago from 'lib/timeago'
 import { useState } from 'react'
 import NewComment from 'components/NewComment'
+import Link from 'next/link'
 
 const Comment = ({ comment }) => {
   const [showReply, setShowReply] = useState(false)

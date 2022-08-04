@@ -50,7 +50,7 @@ export default function Setup() {
           pattern='\w*'
           title='Numbers or letters or _ only'
           placeholder='Numbers or letters or _ only'
-          minlength='5'
+          minLength='5'
         />
       </div>
 
