@@ -1,5 +1,5 @@
 import Nextconnect from 'next-connect'
-import mMltiparty from 'multiparty'
+import Multiparty from 'multiparty'
 
 const middleware = Nextconnect()
 
