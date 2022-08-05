@@ -1,13 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-}
-
-module.exports = nextConfig
-
 module.exports = {
-  webpack: (config, { isServer }) => {
+  webpack: (nextConfig, { isServer }) => {
       if (!isServer) {
           // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
           config.resolve.fallback = {
@@ -15,6 +8,6 @@ module.exports = {
           }
       }
 
-      return config;
+      return nextConfig;
   }
 }
